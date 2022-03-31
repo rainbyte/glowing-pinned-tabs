@@ -6,6 +6,8 @@ chrome.runtime.sendMessage({ request: "isPinnedTab?" }, isPinned => {
         canvas.width = 32;
         canvas.height = 32;
         let ctx = canvas.getContext("2d");
+
+        // Handle icons when they are found
         for (const node of nodes) {
             var favicon = new Image(32, 32);
             favicon.src = node.href;
@@ -21,6 +23,16 @@ chrome.runtime.sendMessage({ request: "isPinnedTab?" }, isPinned => {
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
                 node.href = canvas.toDataURL();
             };
+        }
+
+        // Fill space anyways when there is no icon
+        if (!nodes || nodes.length == 0) {
+            ctx.fillStyle = "#FF00FF";
+            ctx.fillRect(0, 0, canvas.width, 4);
+            link = document.createElement('link');
+            link.rel = 'icon';
+            link.href = canvas.toDataURL();
+            document.getElementsByTagName('head')[0].appendChild(link);
         }
     }
 });
