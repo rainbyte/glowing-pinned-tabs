@@ -15,7 +15,7 @@ chrome.runtime.sendMessage({ request: "isPinnedTab?" }, isPinned => {
             favicon.onload = function () {
                 ctx.drawImage(favicon, 0, 0, canvas.width, canvas.height);
                 ctx.fillStyle = "#FF00FF";
-                ctx.fillRect(0, 0, canvas.width, 4);
+                ctx.fillRect(0, 0, canvas.width, 8);
                 node.href = canvas.toDataURL();
             };
             favicon.onerror = function () {
@@ -28,7 +28,7 @@ chrome.runtime.sendMessage({ request: "isPinnedTab?" }, isPinned => {
         // Fill space anyways when there is no icon
         if (!nodes || nodes.length == 0) {
             ctx.fillStyle = "#FF00FF";
-            ctx.fillRect(0, 0, canvas.width, 4);
+            ctx.fillRect(0, 0, canvas.width, 8);
             link = document.createElement('link');
             link.rel = 'icon';
             link.href = canvas.toDataURL();
